@@ -294,20 +294,44 @@ public class PaintBrush extends Applet {
 						
 							shape.add(new Rectangle( x2, y2,15, 15, "eraser", false ,true));
 							
+							repaint(x2,y2,15,15);
+							
 						break;
 						
 						case "pencil":
 						
 							shape.add(new Rectangle( x2, y2,15, 15, "pencil", false  ,true));
 							
+							repaint(x2,y2,15,15);
+							
 						break;
+						
+						case "line":
+							
+							isDrwingFlag = true;
+							repaint(x1,y1,x2,y2);
+							
+						break;
+
+						case "rectangle":
+						
+							isDrwingFlag = true;
+							
+							repaint(x,y,width,height);
+						
+						break;
+
+						case "oval":
+						
+							isDrwingFlag = true;
+
+							repaint(x,y,width,height);
+
+						break;
+
 				
 					}
-					
-					isDrwingFlag = true;
-        
-					repaint();
-					
+			
 				
 			}  			
 				
@@ -331,35 +355,43 @@ public class PaintBrush extends Applet {
 						
 						case "line":
 
-						shape.add(new Line(x1 , y1 , x2 , y2, "line" , isDotted));
+							shape.add(new Line(x1 , y1 , x2 , y2, "line" , isDotted));
+							
+							isDrwingFlag = false;
+							
+							repaint(x1,y1,x2,y2);
+						
 
 						break;
 
 						case "rectangle":
 
-						checkDimentions(x1 , y1 ,  x2 , y2);
+							checkDimentions(x1 , y1 ,  x2 , y2);
 
-						shape.add(new Rectangle(x, y, width, height, "rectangle", isDotted, isFilled));
+							shape.add(new Rectangle(x, y, width, height, "rectangle", isDotted, isFilled));
+							
+							isDrwingFlag = false;
+							
+							repaint(x,y,width+2,height+2);
 
 						break;
 
 						case "oval":
 
-						checkDimentions(x1 , y1 ,  x2 , y2);
+							checkDimentions(x1 , y1 ,  x2 , y2);
 
-						shape.add(new Oval(x, y, width, height, "oval",isDotted ,isFilled));
+							shape.add(new Oval(x, y, width, height, "oval",isDotted ,isFilled));
+							
+							isDrwingFlag = false;
+							
+							repaint(x,y,width,height);
 
 						break;
 
 
 					}	
 	
-			
-					isDrwingFlag = false;
-			
-					repaint();
-					
-				
+					//repaint();
 				}
 			
 			}
@@ -367,9 +399,7 @@ public class PaintBrush extends Applet {
 			
 		};
 		
-        
-		
-
+ 
         this.addMouseListener(adapter);
 		
 		this.addMouseMotionListener(adapter);
